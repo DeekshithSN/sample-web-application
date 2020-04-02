@@ -43,8 +43,9 @@ pipeline{
                 {
               steps{
                   script{
-                   sh 'docker ps'
-                   sh 'echo $Docker_tag'
+                   sh 'docker image ls'
+                   sh 'docker build . -t devops-training:$Docker_tag'
+		   sh 'docker images ls'
                         }
                     }
                  }
