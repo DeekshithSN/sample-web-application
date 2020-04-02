@@ -19,6 +19,7 @@ stages{
             }
          }
     
+    
       stage('Quality Gate Statuc Check'){
           steps{
               script{
@@ -31,6 +32,9 @@ stages{
           }
         }  
       }
+    
+    
+    
       stage('build')
         {
       steps{
@@ -39,6 +43,19 @@ stages{
                 }
             }
          }
+      
+    
+    
+    stage('Dockerizing application')
+        {
+      steps{
+          script{
+           sh 'docker build . -t devops-tutorials'
+                }
+            }
+         }
+    
+    
        }
     
 
