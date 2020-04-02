@@ -1,4 +1,4 @@
-currentBuild.displayName = "Devops-Training"+currentBuild.number
+currentBuild.displayName = "Devops-Training # "+currentBuild.number
 
 pipeline{
         agent any  
