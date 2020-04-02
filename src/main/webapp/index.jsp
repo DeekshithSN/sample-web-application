@@ -22,6 +22,18 @@
 </head>
 
 <body>
+    
+    
+      <%
+         // Throw an exception to invoke the error page
+         int x = 1;
+         
+         if (x == 1) {
+            throw new RuntimeException("Error condition!!!");
+         }
+      %>
+    
+    
 
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
