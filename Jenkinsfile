@@ -41,24 +41,11 @@ stages{
         {
       steps{
           script{
-           sh 'mvn clean install'
-                }
-            }
-         }
-      
-    
-    
-    stage('Dockerizing application')
-        {
-      steps{
-          script{
-           sh 'docker build . -t devops-tutorials'
+           sh 'mvn clean deploy'
                 }
             }
          }
     
     
        }
-    
-
 }
