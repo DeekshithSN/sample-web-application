@@ -48,6 +48,7 @@ pipeline{
 				    
 				  docker login -u deekshithsn -p $docker_password
 				  docker push deekshithsn/devops-training:$Docker_tag
+				  }
 			}
                        }
                     }
