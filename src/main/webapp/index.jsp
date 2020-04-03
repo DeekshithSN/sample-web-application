@@ -90,6 +90,7 @@
     </footer>
 </div> <!-- /container -->
 
+    <h1>Thanks for visiting website</h1>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
