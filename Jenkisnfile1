@@ -1,7 +1,7 @@
 currentBuild.displayName = "Devops-Training # "+currentBuild.number
 
    def getDockerTag(){
-        def tag = sh script: 'git rev-parse HEAD' , returnStdout: true
+        def tag = sh script: 'git rev-parse HEAD', returnStdout: true
         return tag
         }
         
