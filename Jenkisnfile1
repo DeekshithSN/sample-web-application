@@ -56,6 +56,7 @@ pipeline{
 		stage('ansible playbook'){
 			steps{
 			 	script{
+				    sh 'sed -i s/docker_tag/$Docker_tag/g  deployment.yaml'
 				    ansiblePlaybook become: true, installation: 'ansible', inventory: 'hosts', playbook: 'ansible.yaml'
 				}
 			}
