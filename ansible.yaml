@@ -4,4 +4,8 @@
     copy:
       src: deployment.yaml
       dest: /root/
+  - name: Create a Deployment by reading the definition from a local file
+    k8s:
+      state: present
+      src: /root/deployment.yaml
       
