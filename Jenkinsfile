@@ -8,7 +8,7 @@ stages{
         {
       steps{
           script{
-              echo 
+              sh 'echo hi' 
                 }
             }
          }
