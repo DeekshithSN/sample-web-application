@@ -14,11 +14,6 @@ pipeline{
         
         stages{
 
-		stage('cleanup') {
-            steps {
-                step([$class: 'WsCleanup'])
-            }
-        }
 
               stage('Quality Gate Statuc Check'){
 
@@ -72,6 +67,13 @@ pipeline{
 			}
 		}
 		
+		
+		
+			stage('cleanup') {
+			    steps {
+				step([$class: 'WsCleanup'])
+			    }
+			}
 		
                }
 }
