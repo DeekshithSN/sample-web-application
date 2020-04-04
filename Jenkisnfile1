@@ -67,13 +67,7 @@ pipeline{
 			}
 		}
 		
-		
-		
-			stage('cleanup') {
-			    steps {
-				step([$class: 'WsCleanup'])
-			    }
-			}
+	
 		
                }
 }
