@@ -48,7 +48,7 @@ pipeline{
               steps{
                   script{
 		  sh 'pwd'
-		  sh 'sh cp -r ../simple_web_application@2/target .'
+		  sh 'cp -r ../simple_web_application@2/target .'
 		    sh 'ls'
                    sh 'docker build . -t deekshithsn/devops-training:$Docker_tag'
 		   withCredentials([string(credentialsId: 'docker_password', variable: 'docker_password')]) {
