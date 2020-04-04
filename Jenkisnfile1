@@ -45,7 +45,9 @@ pipeline{
               stage('build')
                 {
               steps{
-                  script{               
+                  script{
+		  sh 'pwd'
+		  sh 'ls'
                    sh 'docker build . -t deekshithsn/devops-training:$Docker_tag'
 		   withCredentials([string(credentialsId: 'docker_password', variable: 'docker_password')]) {
 				    
