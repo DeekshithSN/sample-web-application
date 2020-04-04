@@ -1,4 +1,3 @@
-currentBuild.displayName = "Devops-Training"+currentBuild.number
 
 pipeline{
 
