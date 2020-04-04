@@ -35,7 +35,7 @@ pipeline{
                       }
                     }
 		    sh "mvn clean install"
-		    sh "cp -r ../simple_web_application@2/target ."
+		    sh 'ls'
                   }
                 }  
               }
@@ -80,11 +80,7 @@ pipeline{
            		 deleteDir() /* clean up our workspace */
        			 }																	
         	
-		 failure {
-        		mail to: 'deekshithsn@gmail.com',
-             		subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
-             		body: "Something is wrong with ${env.BUILD_URL}"
-    			}
+		
 		
    		 }
     
