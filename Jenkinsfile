@@ -4,7 +4,7 @@ pipeline{
     agent any
    
 stages{
-    stage('sonar')
+    stage('say hi')
         {
       steps{
           script{
