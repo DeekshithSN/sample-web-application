@@ -35,6 +35,7 @@ pipeline{
                       }
                     }
 		    sh "mvn clean install"
+		    sh "cp -r ../simple_web_application@2/target ."
                   }
                 }  
               }
