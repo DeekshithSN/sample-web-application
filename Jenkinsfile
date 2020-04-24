@@ -14,9 +14,7 @@ pipeline{
                       script{
 		    	    sh "mvn clean install"
                  	}
-		      publishers {
-                    	    findText regexp: WARNING, alsoCheckConsoleOutput: true notBuiltIfFound: true
-                	}
+
                	 }  
               }	
 		
