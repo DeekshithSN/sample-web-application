@@ -24,7 +24,7 @@ pipeline {
                         script {
                             while (BUILD_COMPLETE != true) {
                                 sh '! grep "WARNING" /home/deekshithsn1/output.log'
-                                
+                                sleep 2
                             }
                         }
                     }
