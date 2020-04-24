@@ -16,7 +16,7 @@ pipeline {
                 stage('Building') {
                     steps {
                         
-                        sh "mvn clean install |  tee -a output.log"
+                        sh "mvn clean install |  tee -a /home/deekshithsn1/output.log"
 
                         sh '! grep "WARNING:" output.log'
 
@@ -29,7 +29,7 @@ pipeline {
                     steps {
                         script {
                             while (BUILD_COMPLETE != true) {
-                                sh '! grep "WARNING:" output.log'
+                                sh '! grep "WARNING:" /home/deekshithsn1/output.log'
                                 
                             }
                         }
