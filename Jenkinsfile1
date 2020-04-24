@@ -12,7 +12,7 @@ pipeline {
                         
                         sh "mvn clean install |  tee -a /home/deekshithsn1/output.log"
 
-                        sh '! grep "WARNING:" output.log'
+                        sh '! grep "WARNING" output.log'
 
                         script {
                             BUILD_COMPLETE = true
@@ -23,7 +23,7 @@ pipeline {
                     steps {
                         script {
                             while (BUILD_COMPLETE != true) {
-                                sh '! grep "WARNING:" /home/deekshithsn1/output.log'
+                                sh '! grep "WARNING" /home/deekshithsn1/output.log'
                                 
                             }
                         }
