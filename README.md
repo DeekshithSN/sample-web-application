@@ -11,5 +11,3 @@ mvn clean package
 
 Deploy ```target/WebApp.war``` on Tomcat 
 
-
-This is for fetch
