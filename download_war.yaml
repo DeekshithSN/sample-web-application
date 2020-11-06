@@ -1,0 +1,9 @@
+- hosts: test
+  tasks:
+  - name: remove files 
+    command: rm -rf rm -rf /home/ec2-user/apache-tomcat-9.0.39/webapps/*
+  - name: Create a Deployment by reading the definition from a local file
+    get_url:
+      url: http://35.193.34.53:8081/repository/maven-public/lu/amazon/aws/demo/WebApp/1.0-SNAPSHOT/WebApp-1.0-20201106.101637-4.war
+      dest: /home/ec2-user/apache-tomcat-9.0.39/webapps/ROOT.war
+      mode: 0777
