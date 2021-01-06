@@ -22,7 +22,7 @@ pipeline{
            	 	}
 		      
                   steps{
-                      build ('$mvnaction')
+                      build ($mvnaction)
                	     }  
                  }	
                  
