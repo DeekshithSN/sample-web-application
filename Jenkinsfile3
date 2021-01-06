@@ -27,6 +27,10 @@ pipeline{
                  }
 		
 		stage ('docker build and push') {
+			
+		   when {
+				expression { params.mvnaction == 'Install' }
+			}
                     steps {
 			sh 'cp -r ../shared-library@2/target .'
                         docker ()
