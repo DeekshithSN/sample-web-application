@@ -4,16 +4,19 @@
 
 pipeline{
 
-      agent {
-                docker {
-                image 'maven'
-                args '-v $HOME/.m2:/root/.m2'
-                }
-            }
+      
         
         stages{
 
               stage('build'){
+		      
+		      agent {
+                	docker {
+                	image 'maven'
+                	args '-v $HOME/.m2:/root/.m2'
+               		    }
+           	 	}
+		      
                   steps{
                       build ('Clean')
                	     }  
@@ -21,7 +24,7 @@ pipeline{
                  
                  stage ('Check logs') {
                     steps {
-                        filterLogs ('WARNING', 1)
+                        filterLogs ('WARNING', 10)
                     }
                 }
 		
