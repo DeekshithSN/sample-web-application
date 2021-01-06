@@ -4,7 +4,11 @@
 
 pipeline{
 
-      
+      parameters {
+	      choice(name:'mvnaction',
+	      choices: 'Clean\nCompile\nTest\nInstall',
+	      description: 'based on selection jenkins will run resepective maven command')
+    	}
         
         stages{
 
@@ -18,7 +22,7 @@ pipeline{
            	 	}
 		      
                   steps{
-                      build ('Clean')
+                      build ('$mvnaction')
                	     }  
                  }	
                  
