@@ -1,0 +1,85 @@
+#!/usr/bin/env groovy
+
+@Library('shared-library@master') _ //master or whatever branch
+
+  def getDockerTag(){
+        def tag = sh script: 'git rev-parse HEAD', returnStdout: true
+        return tag
+        }
+
+pipeline{
+      agent any
+       environment{
+	    Docker_tag = getDockerTag()
+        }
+      parameters {
+	      choice(name:'mvnaction',
+	      choices: 'Clean\nCompile\nTest\nInstall',
+	      description: 'based on selection jenkins will run resepective maven command')
+    	}
+        
+        stages{
+
+              stage('build'){
+		      
+		      agent {
+                	docker {
+                	image 'maven'
+                	args '-v $HOME/.m2:/root/.m2'
+               		    }
+           	 	}
+		      
+                  steps{
+			                    script{
+                                    sh "mvn --version"
+                                      sh "echo $mvnaction"
+                                      if ("${mvnaction}" == "Clean")
+                                            {
+                                            sh "mvn clean"
+                                            }
+                                      else if ("${mvnaction}" == "Compile")
+                                            {
+                                            sh "mvn clean compile"
+                                            }
+                                       else if ("${mvnaction}" == "Test")
+                                            {
+                                            sh "mvn clean test"
+                                            }
+                                         else if ("${mvnaction}" == "Install")
+                                            {
+                                            sh "mvn clean install"
+                                            }
+                        }
+               	     }  
+                 }
+		
+		stage ('docker build and push') {
+			
+		   when {
+				expression { params.mvnaction == 'Install' }
+			}
+                    steps {
+                                  script{
+                                         sh 'cp -r ../shared-library@2/target .'
+                                         sh 'docker build . -t deekshithsn/devops-training:$Docker_tag'
+                                           withCredentials([string(credentialsId: 'docker_password', variable: 'docker_password')]) {
+
+                                              sh 'docker login -u deekshithsn -p $docker_password'
+                                              sh 'docker push deekshithsn/devops-training:$Docker_tag'
+                                          }
+                       }
+                    }
+                }
+		
+                 
+                 stage ('Check logs') {
+                    steps {
+                       script {
+                            
+                                sh '! grep "WARNING" currentBuild.rawBuild.getLog(10000).join('\n')'
+                        }
+                    }
+                }
+		
+           }	       	     	         
+}
