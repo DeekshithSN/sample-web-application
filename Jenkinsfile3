@@ -6,7 +6,6 @@
         def tag = sh script: 'git rev-parse HEAD', returnStdout: true
         return tag
         }
-
 pipeline{
       agent any
        environment{
@@ -17,9 +16,7 @@ pipeline{
 	      choices: 'Clean\nCompile\nTest\nInstall',
 	      description: 'based on selection jenkins will run resepective maven command')
     	}
-        
         stages{
-
               stage('build'){
 		      
 		      agent {
@@ -27,15 +24,12 @@ pipeline{
                 	image 'maven'
                 	args '-v $HOME/.m2:/root/.m2'
                		    }
-           	 	}
-		      
+           	 	}		      
                   steps{
 			  build ("${mvnaction}")
                	     }  
-                 }
-		
-		stage ('docker build and push') {
-			
+                 }	
+		stage ('docker build and push') {	
 		   when {
 				expression { params.mvnaction == 'Install' }
 			}
@@ -44,8 +38,6 @@ pipeline{
 			    dockerbuild ("${Docker_tag}")
                     }
                 }
-		
-                 
                  stage ('Check logs') {
                     steps {
                         filterLogs ('WARNING', 10)
