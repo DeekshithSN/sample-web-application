@@ -3,7 +3,7 @@
 @Library('shared-library@master') _ //master or whatever branch
 
 pipeline{
-
+      agent any
       parameters {
 	      choice(name:'mvnaction',
 	      choices: 'Clean\nCompile\nTest\nInstall',
