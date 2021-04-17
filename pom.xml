@@ -15,17 +15,17 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-  <build>
+<build>
   <pluginManagement>
-    <plugins>
-      <plugin>
-        <groupId>org.codehaus.sonar</groupId>
+      <plugins>
+       <plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
         <artifactId>sonar-maven-plugin</artifactId>
-        <version>3.6.1.1688</version>
+        <version>3.7.0.1746</version>
       </plugin>
     </plugins>
   </pluginManagement>
-</build>
+  </build>
 <!--   <build>
     <finalName>WebApp</finalName>
   </build> -->
