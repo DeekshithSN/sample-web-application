@@ -21,7 +21,7 @@
       <plugin>
         <groupId>org.codehaus.sonar</groupId>
         <artifactId>sonar-maven-plugin</artifactId>
-        <version>2.5</version>
+        <version>3.7.0.1746</version>
       </plugin>
     </plugins>
   </pluginManagement>
