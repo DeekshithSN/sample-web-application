@@ -3,6 +3,7 @@ pipeline{
       agent {
                 docker {
                 image 'maven:3-openjdk-11'
+
                 }
             }
         
@@ -12,7 +13,7 @@ pipeline{
                   steps{
                       script{
 			      withSonarQubeEnv('sonarserver') { 
-			      sh "mvn clean sonar:sonar -X"
+			      sh "mvn clean sonar:sonar"
                        	     	}
 			      timeout(time: 1, unit: 'HOURS') {
 			      def qg = waitForQualityGate()
