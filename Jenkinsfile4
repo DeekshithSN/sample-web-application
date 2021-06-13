@@ -77,6 +77,7 @@ pipeline{
                        script {
                             
                                 sh '! grep "WARNING" currentBuild.rawBuild.getLog(10000).join('\n')'
+			       
                         }
                     }
                 }
