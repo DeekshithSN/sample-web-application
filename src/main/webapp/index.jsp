@@ -31,7 +31,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Devops-training</a>
+            <a class="navbar-brand" href="#">Devops-trainings</a>
         </div>
         <div class="navbar-collapse collapse">
             <form class="navbar-form navbar-right" role="form">
@@ -46,7 +46,6 @@
         </div><!--/.navbar-collapse -->
     </div>
 </div>
-
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
     <div class="container">
