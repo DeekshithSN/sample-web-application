@@ -5,7 +5,7 @@ pipeline{
             steps{
                 script{
                 withSonarQubeEnv(credentialsId: 'new_sonar') {
-                      mvn sonar:sonar 
+                      sh 'mvn sonar:sonar' 
                   }
                 }
             }
