@@ -17,6 +17,14 @@ pipeline{
                 }
             }
         }
+        
+        stage("Pushing the artifact to nexus"){
+            steps{
+                script{
+                    sh 'mvn clean deploy'
+                }
+            }
+        }
     }
     post{
         always{
