@@ -1,22 +1,25 @@
 pipeline{
-
-      agent {
-                docker {
-                image 'maven'
-                args '-v $HOME/.m2:/root/.m2'
+    agent any
+    stages{
+        stage("Sonarqube analysis"){
+            steps{
+                script{
+                withSonarQubeEnv(credentialsId: 'new_sonar') {
+                      mvn sonar:sonar 
+                  }
                 }
             }
-        
-        stages{
-
-              stage('Quality Gate Status Check'){
-                  steps{
-                      script{
-		    	    sh "mvn clean install"
-                 	}
-
-               	 }  
-              }	
-		
-            }	       	     	         
+        }
+    }
+    post{
+        always{
+            echo "========always========"
+        }
+        success{
+            echo "========pipeline executed successfully ========"
+        }
+        failure{
+            echo "========pipeline execution failed========"
+        }
+    }
 }
