@@ -23,9 +23,10 @@ pipeline{
                  
                  stage ('Check logs') {
                     steps {
-                        //filterLogs ('WARNING', 10)
+                        
 			    script{
-				    calculator.add(2,3)
+				    //calculator.add(2,3)
+				    filterLogs('WARNING', 10)
 			    }
                     }
                 }
