@@ -1,4 +1,4 @@
-@Library('javahome-demo@main')_ //master or whatever branch
+@Library('javahome-demo')_ //master or whatever branch
 def nodeJS = new de.mare.ci.jenkins.NodeJS()
 node {
   // npm install:
