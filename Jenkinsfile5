@@ -9,7 +9,7 @@ stages{
   stage('npm build'){
     steps{
      script{
-     	sh "npm install"
+     	sh 'react.groovy'
       }
      }  
    }	
