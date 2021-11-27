@@ -9,7 +9,7 @@ stages{
   stage('npm build'){
     steps{
      script{
-		     sh "mvn clean install"
+     	sh "npm install"
       }
      }  
    }	
