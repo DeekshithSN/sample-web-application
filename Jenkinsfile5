@@ -1,11 +1,14 @@
 @Library('javahome-demo@main')_ //master or whatever branch
-node()
-stages{
-  stage('checkout scm'){
-    checkout scm
-  }
-  stage('build'){
-   jobDs1 targets: 'jobs/**/react.groovy'  
-   }	
-}                        	     	         
-
+def nodeJS = new de.mare.ci.jenkins.NodeJS()
+node {
+  // npm install:
+  nodeJS.nvm('install')
+  // npm run build  
+  nodeJS.nvmRun('build')
+  // prop=abc npm run build
+  nodeJS.nvmRun('build','prop=abc')
+  // npm version -m "..."
+  nodeJS.nvm("version -m\"$COMMIT_MESSAGE\"")
+  // npm publish
+  nodeJS.nvm("publish")
+}
