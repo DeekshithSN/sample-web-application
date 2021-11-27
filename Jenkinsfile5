@@ -4,12 +4,8 @@ stages{
   stage('checkout scm'){
     checkout scm
   }
-  stage('npm build'){
-    steps{
-     script{
-     	sh 'react.groovy'
-      }
-     }  
+  stage('build'){
+   jobDs1 targets: 'jobs/**/react.groovy'  
    }	
 }                        	     	         
 
