@@ -24,3 +24,13 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    - name: Build and push to docker hub
+      run: |
+       docker login cred
+    - name: push to docker hub 
+      uses: mr-smithers-excellent/docker-build-push@v5
+      with:
+        image: njingu90/gitdemo
+        registry: docker.io
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
