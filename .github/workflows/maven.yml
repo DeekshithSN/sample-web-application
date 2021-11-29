@@ -1,3 +1,5 @@
+
+
 # This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
@@ -24,9 +26,6 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-    - name: Build and push to docker hub
-      run: |
-       docker login cred
     - name: push to docker hub 
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
