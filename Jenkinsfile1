@@ -45,7 +45,7 @@ pipeline{
                   script{
 		  sh 'cp -r ../devops-training@2/target .'
                   sh 'docker build . -t naziyashaik/sample-web-app:$Docker_tag'
-		  withCredentials([string(credentialsId: 'docker_password', variable: 'docker_password')]) {			    
+		  withCredentials([string(credentialsId: 'passwd', variable: 'docker_password')]) {		    
 				  sh 'docker login -u naziyashaik -p $docker_password'
 				  sh 'docker push naziyashaik/sample-web-app:$Docker_tag'
 			}
