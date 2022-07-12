@@ -37,11 +37,11 @@ pipeline{
               stage('build'){
 		      steps {
 			      script{
-                sh 'docker build . -t deekshithsn/devops-training:$Docker_tag'
-                withCredentials([string(credentialsId: 'docker_password', variable: 'docker_password')]) {
-    
-                sh '''docker login -u deekshithsn -p $docker_password
-                docker push deekshithsn/devops-training:$Docker_tag
+		 sh 'cp -r ../Devops_Life@2/target .'
+                 sh 'docker build . -t naziyashaik/sample-web-app:$Docker_tag'
+		 withCredentials([string(credentialsId: 'passwd', variable: 'docker_password')]) {		    
+			  	sh 'docker login -u naziyashaik -p $docker_password'
+				sh 'docker push naziyashaik/sample-web-app:$Docker_tag'
 		'''
                 }
                 
