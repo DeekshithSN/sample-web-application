@@ -43,7 +43,7 @@ pipeline{
                 {
               steps{
                   script{
-		  sh 'cp -r ../Devops_Life/target .'
+		  sh 'cp -r ../Devops_Life@2/target .'
                   sh 'docker build . -t naziyashaik/sample-web-app:$Docker_tag'
 		  withCredentials([string(credentialsId: 'passwd', variable: 'docker_password')]) {		    
 				  sh 'docker login -u naziyashaik -p $docker_password'
