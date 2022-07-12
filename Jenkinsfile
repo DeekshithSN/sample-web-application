@@ -6,7 +6,7 @@ pipeline{
 
       agent {
                 docker {
-                image 'maven'
+                image 'maven:3.8.1-adoptopenjdk-11'
                 args '-v $HOME/.m2:/root/.m2'
                 }
              }
@@ -37,11 +37,11 @@ pipeline{
               stage('build'){
 		      steps {
 			      script{
-		 sh 'cp -r ../Devops_Life@2/target .'
-                 sh 'docker build . -t naziyashaik/sample-web-app:$Docker_tag'
-		 withCredentials([string(credentialsId: 'passwd', variable: 'docker_password')]) {		    
-			  	sh 'docker login -u naziyashaik -p $docker_password'
-				sh 'docker push naziyashaik/sample-web-app:$Docker_tag'
+					 sh 'cp -r ../Devops_Life@2/target .'
+                 			 sh 'docker build . -t naziyashaik/sample-web-app:$Docker_tag'
+		 				withCredentials([string(credentialsId: 'passwd', variable: 'docker_password')]) {		    
+			  			sh 'docker login -u naziyashaik -p $docker_password'
+						sh 'docker push naziyashaik/sample-web-app:$Docker_tag'
 		'''
                 }
                 
