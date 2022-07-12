@@ -42,7 +42,6 @@ pipeline{
 		 				withCredentials([string(credentialsId: 'passwd', variable: 'docker_password')]) {		    
 			  			sh 'docker login -u naziyashaik -p $docker_password'
 						sh 'docker push naziyashaik/sample-web-app:$Docker_tag'
-		'''
                 }
                 
 			      }
