@@ -1,15 +1,7 @@
-currentBuild.displayName = "Final_Demo # "+currentBuild.number
-
-   def getDockerTag(){
-        def tag = sh script: 'git rev-parse HEAD', returnStdout: true
-        return tag
-        }
-        
-
 pipeline{
         agent any  
-        environment{
-	    Docker_tag = getDockerTag()
+        options {
+    buildDiscarder(logRotator(numToKeepStr: '5'))
         }
         
         stages{
@@ -25,7 +17,7 @@ pipeline{
             }
                   steps{
                       script{
-                      withSonarQubeEnv('sonarserver') { 
+                      withSonarQubeEnv('sq1') { 
                       sh "mvn sonar:sonar"
                        }
                       timeout(time: 1, unit: 'HOURS') {
