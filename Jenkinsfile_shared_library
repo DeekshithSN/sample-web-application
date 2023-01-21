@@ -29,15 +29,15 @@ pipeline{
 			  build ("${mvnaction}")
                	     }  
                  }	
-		stage ('docker build and push') {	
-		   when {
-				expression { params.mvnaction == 'Install' }
-			}
-                    steps {
-			sh 'cp -r ../shared-library@2/target .'
-			    dockerbuild ("${Docker_tag}")
-                    }
-                }
+// 		stage ('docker build and push') {	
+// 		   when {
+// 				expression { params.mvnaction == 'Install' }
+// 			}
+//                     steps {
+// 			sh 'cp -r ../shared-library@2/target .'
+// 			    dockerbuild ("${Docker_tag}")
+//                     }
+//                 }
                  stage ('Check logs') {
                     steps {
                         filterLogs ('WARNING', 10)
