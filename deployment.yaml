@@ -19,7 +19,7 @@ spec:
         ports:
             - name: http
               containerPort: 8080
-  replicas: 2
+  replicas: 1
 ---
 apiVersion: v1
 kind: Service
