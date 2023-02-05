@@ -1,21 +1,19 @@
 pipeline{
     agent any
     stages{
-        stage("A"){
-            steps{
-                echo "========executing A========"
+        stage("static code analysis"){
+            agent {
+                docker {
+                    image: 'maven'
+                }
             }
-        }
-    }
-    post{
-        always{
-            echo "========always========"
-        }
-        success{
-            echo "========pipeline executed successfully ========"
-        }
-        failure{
-            echo "========pipeline execution failed========"
+            steps{
+                script{
+                    withSonarQubeEnv(credentialsId: 'sonar-qube-token') {
+                            sh "mvn sonar:sonar"
+                    }
+                }
+            }
         }
     }
 }
