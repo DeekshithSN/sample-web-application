@@ -12,6 +12,12 @@ pipeline{
                     withSonarQubeEnv(credentialsId: 'sonar-qube-token') {
                             sh "mvn sonar:sonar"
                     }
+                    timeout(5){
+                        def qg = waitForQualityGate()
+                        if (qg.status != 'OK'){
+                            error "code didnt met qulaity gate"
+                        }
+                    }
                 }
             }
         }
