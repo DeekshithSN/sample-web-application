@@ -66,5 +66,18 @@ pipeline{
                 }
             }
         }
+
+        stage('approval from managers'){
+            input {
+                message "do you want to procced for deployment?"
+                ok "App will be deployed"
+                submitter "alice,bob"
+            }
+             steps{
+                script{
+                        sh "echo Approved!!!!"
+                }
+             }
+        }
     }
 }
