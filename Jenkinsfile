@@ -86,7 +86,7 @@ pipeline{
         stage('prepare deplyment file'){
             steps{
                 script{
-                    sh "sed -i 's:IMAGE_NAME:deekshithsn/webapp:$Docker_tag:1' deployment.yaml"
+                    sh "sed -i 's|IMAGE_NAME|deekshithsn/webapp:$Docker_tag|1' deployment.yaml"
                     sh "cat deployment.yaml"
                 }
             }
