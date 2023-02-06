@@ -101,6 +101,7 @@ pipeline{
                     sh"""
                         export KUBECONFIG=/opt/config
                         kubectl get po 
+                        kubectl apply -f deployment.yaml
                     """
                 }
             }
