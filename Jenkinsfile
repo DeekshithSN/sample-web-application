@@ -1,5 +1,13 @@
+def getDockerTag(){
+    def tag = sh script: 'git rev-parse HEAD', return: true
+    return tag
+}
+
 pipeline{
-    agent none
+    agent any
+    environment{
+        Docker_tag = getDockerTag()
+    }
     stages{
         stage("static code analysis"){
             agent {
@@ -33,6 +41,15 @@ pipeline{
             steps{
                 script{
                     sh "mvn clean install"
+                }
+            }
+        }
+
+        stage('docker build'){
+            steps {
+                script{
+                    sh "docker build . -t deekshithsn/webapp:$Docker_tag"
+                    currentBuild.description = "deekshithsn/webapp: + $Docker_tag"
                 }
             }
         }
