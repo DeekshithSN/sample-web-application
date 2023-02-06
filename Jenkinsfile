@@ -94,5 +94,19 @@ pipeline{
                 }
             }
         }
+
+        stage('authenticate & deploy'){
+            agent {
+                docker {
+                    image 'bitnami/kubectl'
+                    args '-v /opt/config:/.kube/config '
+                }
+            }
+            steps{
+                script{
+                    sh "kubectl get po"
+                }
+            }
+        }
     }
 }
