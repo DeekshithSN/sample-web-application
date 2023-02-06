@@ -7,6 +7,7 @@ pipeline{
     agent any
     environment{
         Docker_tag = getDockerTag()
+        docker_login = credentials('public-docker-auth')
     }
     stages{
         stage("static code analysis"){
@@ -50,6 +51,17 @@ pipeline{
                 script{
                     sh "docker build . -t deekshithsn/webapp:$Docker_tag"
                     currentBuild.description = "deekshithsn/webapp:$Docker_tag"
+                }
+            }
+        }
+
+        stage('docker upload'){
+            steps{
+                script{
+                    sh """
+                        docker login -u docker_login_USR -p docker_login_PSW
+                        docker push deekshithsn/webapp:$Docker_tag
+                    """
                 }
             }
         }
