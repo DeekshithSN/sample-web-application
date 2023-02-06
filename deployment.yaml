@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: devops-training
-        image: IMAGE_NAME
+        image: deekshithsn/webapp:TAG
         command: ["/bin/sh"]
         args: ["-c","sh /usr/local/tomcat/bin/startup.sh;while true; do echo hello; sleep 10;done"]
         ports:
