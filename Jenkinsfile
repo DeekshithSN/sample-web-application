@@ -49,7 +49,7 @@ pipeline{
             steps {
                 script{
                     sh "docker build . -t deekshithsn/webapp:$Docker_tag"
-                    currentBuild.description = "deekshithsn/webapp: + $Docker_tag"
+                    currentBuild.description = "deekshithsn/webapp:$Docker_tag"
                 }
             }
         }
