@@ -87,7 +87,8 @@ pipeline{
             steps{
                 script{
                     sh '''
-                    sed -i "s|TAG|$Docker_tag|" deployment.yaml
+                    final_tag=$(echo $Docker_tag | tr -d ' ')
+                    sed -i "s|TAG|$final_tag|" deployment.yaml
                     cat deployment.yaml
                     '''
                 }
