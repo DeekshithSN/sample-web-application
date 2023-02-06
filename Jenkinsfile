@@ -72,6 +72,9 @@ pipeline{
                 message "do you want to procced for deployment?"
                 ok "App will be deployed"
                 submitter "alice,bob"
+                parameters {
+                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                }
             }
              steps{
                 script{
