@@ -62,6 +62,7 @@ pipeline{
                         docker login -u $docker_login_USR -p $docker_login_PSW
                         docker push deekshithsn/webapp:$Docker_tag
                     """
+                    addBadge(icon: 'save.gif', text: 'docker registry', link: 'https://hub.docker.com/repository/docker/deekshithsn/webapp/general')
                 }
             }
         }
