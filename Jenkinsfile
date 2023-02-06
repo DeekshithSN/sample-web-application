@@ -70,7 +70,7 @@ pipeline{
         stage('approval from managers'){
             input {
                 message "do you want to procced for deployment?"
-                ok "App will be deployed"
+                ok "Procced?"
                 submitter "alice,bob"
                 parameters {
                     string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
@@ -81,6 +81,15 @@ pipeline{
                         sh "echo Approved!!!!"
                 }
              }
+        }
+
+        stage('prepare deplyment file'){
+            steps{
+                script{
+                    sh "sed -i 's:IMAGE_NAME:deekshithsn/webapp:$Docker_tag:1' deployment.yaml"
+                    sh "cat deployment.yaml"
+                }
+            }
         }
     }
 }
