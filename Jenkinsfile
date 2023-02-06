@@ -49,7 +49,12 @@ pipeline{
         stage('docker build'){
             steps {
                 script{
-                    sh "docker build . -t deekshithsn/webapp:$Docker_tag"
+                    sh """
+                    pwd 
+                    ls -la
+                    cp -r ../backend-app@2/target .
+                    docker build . -t deekshithsn/webapp:$Docker_tag
+                    """
                     currentBuild.description = "deekshithsn/webapp:$Docker_tag"
                 }
             }
@@ -59,9 +64,6 @@ pipeline{
             steps{
                 script{
                     sh """
-                       pwd 
-                       ls -la
-                       cp -r ../backend-app@2/target .
                         docker login -u $docker_login_USR -p $docker_login_PSW
                         docker push deekshithsn/webapp:$Docker_tag
                     """
