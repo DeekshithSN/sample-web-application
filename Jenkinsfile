@@ -59,6 +59,8 @@ pipeline{
             steps{
                 script{
                     sh """
+                       pwd 
+                       ls -la
                        cp -r ../backend-app@2/target .
                         docker login -u $docker_login_USR -p $docker_login_PSW
                         docker push deekshithsn/webapp:$Docker_tag
