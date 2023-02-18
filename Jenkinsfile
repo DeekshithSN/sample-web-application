@@ -51,7 +51,7 @@ pipeline{
                 script{
                     sh """
                     docker login -u admin -p admin 34.125.26.221:8083
-                    docker build -t 34.125.26.221:8083/sample-app:$Docker_tag
+                    docker build -t 34.125.26.221:8083/sample-app:$Docker_tag .
                     """
 
                 }
