@@ -91,6 +91,7 @@ pipeline{
     post {
         always{
             cleanWs()
+            sh 'kubectl delete -f deployment.yaml'
         }
     }
 }
