@@ -1,5 +1,13 @@
+def getDockerTag(){
+    def tag = sh script: 'git rev-parse --short HEAD', returnStdout: true
+    return tag
+    }
+
 pipeline{
     agent any
+    environment{
+        Docker_tag = getDockerTag()
+    }
     stages{
         stage("Sonar scan"){
             agent {
@@ -41,7 +49,11 @@ pipeline{
         stage('docker login and build'){
             steps{
                 script{
-                    sh "docker login -u admin -p admin 34.125.26.221:8083"
+                    sh """
+                    docker login -u admin -p admin 34.125.26.221:8083
+                    docker build -t 34.125.26.221:8083/sample-app:$Docker_tag
+                    """
+
                 }
             }
         }
