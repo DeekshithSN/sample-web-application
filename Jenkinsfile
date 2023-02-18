@@ -60,12 +60,26 @@ pipeline{
             }
         }
 
+        stage('prepare deplyment file'){
+            steps{
+                script{
+                    sh '''
+                    final_tag=$(echo $Docker_tag | tr -d ' ')
+                    sed -i "s|TAG|$final_tag|" deployment.yaml
+                    cat deployment.yaml
+                    '''
+                }
+            }
+        }
         stage('connect k8s cluster'){
             steps{
                 script{
                     configFileProvider(
                         [configFile(fileId: 'kube-config-file', variable: 'KUBECONFIG')]) {
-                        sh 'kubectl get po'
+                        sh """
+                         kubectl get po
+                         kubectl apply -f deployment.yaml
+                         """
                     }
                 }
             }
