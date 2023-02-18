@@ -60,6 +60,17 @@ pipeline{
             }
         }
 
+        stage('connect k8s cluster'){
+            steps{
+                script{
+                    configFileProvider(
+                        [configFile(fileId: 'kube-config-file', variable: 'KUBECONFIG')]) {
+                        sh 'kubectl get po'
+                    }
+                }
+            }
+        }
+
 
     }
 
