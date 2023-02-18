@@ -53,6 +53,7 @@ pipeline{
                     docker login -u admin -p admin 34.125.26.221:8083
                     cp -r ../ci-pull-request@2/target .
                     docker build . -t 34.125.26.221:8083/sample-web-app:$Docker_tag
+                    docker push 34.125.26.221:8083/sample-web-app:$Docker_tag
                     """
 
                 }
