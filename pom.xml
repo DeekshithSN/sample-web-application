@@ -30,4 +30,16 @@
     </plugin>
     </plugins>
   </build>
+  
+  <distributionManagement>
+    <snapshotRepository>
+      <id>nexusdeploymentrepo</id>
+      <url>http://34.125.26.221:8081/repository/maven-hosted-snapshot/</url>
+    </snapshotRepository>
+	<repository>
+	  <id>nexusdeploymentrepo</id>
+      <url>http://34.125.26.221:8081/repository/maven-hosted-release/</url>
+    </repository>
+  </distributionManagement>
+  
 </project>
