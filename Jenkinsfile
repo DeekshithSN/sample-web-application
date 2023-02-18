@@ -23,6 +23,21 @@ pipeline{
                 }
             }
         }
+
+        stage('build the application'){
+            agent {
+                docker {
+                    image 'maven'
+                    args '-v /root/.m2:/root/.m2'
+                }
+            }
+            steps{
+                script{
+                    sh "mvn clean install"
+                }
+            }
+        }
+
     }
 
     post {
