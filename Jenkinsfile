@@ -38,6 +38,15 @@ pipeline{
             }
         }
 
+        stage('docker login and build'){
+            steps{
+                script{
+                    sh "docker login -u admin -p admin 34.125.26.221:8083"
+                }
+            }
+        }
+
+
     }
 
     post {
