@@ -76,7 +76,12 @@ pipeline{
             steps{
                 script{
                     configFileProvider([configFile(fileId: 'kube-dev-config', variable: 'KUBECONFIG')]) {
-                        sh 'kubectl get po'
+                        sh """
+                            kubectl get po
+                            final_tag=$(echo $Docker_tag | tr -d ' ')
+                            sed -i "s|TAG|$final_tag|" deployment.yaml
+                            cat deployment.yaml
+                        """
                     }
                 }
             }
