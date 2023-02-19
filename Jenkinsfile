@@ -51,7 +51,7 @@ pipeline{
                 script{
                     sh """
                     printenv
-                    cp -r ../sample-web-app-pull-request@2/target .
+                    cp -r ../$JOB_BASE_NAME@2/target .
                     docker build . -t 34.125.26.221:8083/sample-app:$Docker_tag
                     """
                 }
