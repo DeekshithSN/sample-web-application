@@ -87,6 +87,28 @@ pipeline{
             }
         }
 
+        stage('approval stage'){
+            steps{
+                script{
+                    timeout(5){
+                        mail bcc: '', body: "<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "${currentBuild.result} CI: Project name -> ${env.JOB_NAME}", to: "deekshithsn@gmail.com";
+                        input(id: "Deploy Gate", message: "Deploy ${params.project_name}?", ok: 'Deploy')
+                    }
+                }
+            }
+        }
+
+        stage('deploy to k8s cluster'){
+            steps{
+                script{
+                    configFileProvider([configFile(fileId: 'kube-dev-config', variable: 'KUBECONFIG')]) {
+                        sh '''
+                            kubectl apply -f deployment.yaml
+                        '''
+                    }
+                }
+            }
+        }
     }
 
     post {
