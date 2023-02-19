@@ -7,6 +7,7 @@ pipeline{
     agent any
     environment{
         Docker_tag = getDockerTag()
+        docker_pws = credentials('docker-password')
     }
     stages{
         stage("Sonar scan"){
@@ -50,9 +51,20 @@ pipeline{
             steps{
                 script{
                     sh """
-                    printenv
                     cp -r ../$JOB_BASE_NAME@2/target .
                     docker build . -t 34.125.26.221:8083/sample-app:$Docker_tag
+                    """
+                }
+            }
+        }
+
+        
+        stage('docker login & push'){
+            steps{
+                script{
+                    sh """
+                       docker login -u admin -p $docker_pws 34.125.26.221:8083
+                       docker push 34.125.26.221:8083/sample-app:$Docker_tag
                     """
                 }
             }
