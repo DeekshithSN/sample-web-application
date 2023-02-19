@@ -72,6 +72,16 @@ pipeline{
             }
         }
 
+        stage('authenticate and prepare k8s manifest files'){
+            steps{
+                script{
+                    configFileProvider([configFile(fileId: 'kube-dev-config', variable: 'KUBECONFIG')]) {
+                        sh 'kubectl get po'
+                    }
+                }
+            }
+        }
+
     }
 
     post {
