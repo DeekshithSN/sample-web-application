@@ -66,15 +66,17 @@ pipeline{
                        docker login -u admin -p $docker_pws 34.125.26.221:8083
                        docker push 34.125.26.221:8083/sample-app:$Docker_tag
                     """
+                    addBadge(icon: 'save.gif', text: 'docker repo', link: 'http://34.125.26.221:8081/#browse/browse:docker-hosted:v2%2Fsample-app')
+                    currentBuild.description = "34.125.26.221:8083/sample-app:$Docker_tag"
                 }
             }
         }
 
     }
 
-    // post {
-    //     always{
-    //         cleanWs()
-    //     }
-    // }
+    post {
+        always{
+            cleanWs()
+        }
+    }
 }
