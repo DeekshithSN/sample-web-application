@@ -20,6 +20,7 @@ pipeline{
                     error "Pipeline aborted due to quality gate failure: ${qg.status}"
                 }
             }
+            }
         }
         stage('build'){
             agent{
@@ -29,11 +30,11 @@ pipeline{
             }
             steps{
                 script{
-                    sh "mvn clean install"
+                    sh "mvn install"
                 }
             }
         }
-                }
+                
             }
         }
     }
