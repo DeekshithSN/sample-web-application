@@ -13,7 +13,8 @@ pipeline{
                     withSonarQubeEnv(credentialsId: 'sonar-token') {
                             sh "mvn clean sonar:sonar"
                         }
-          stage("Quality Gate") {
+        stage("Quality Gate") {
+            agent any
             steps {
               timeout(time: 5, unit: 'MINUTES') {
                 waitForQualityGate abortPipeline: true
