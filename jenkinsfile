@@ -1,7 +1,3 @@
-   def getDockerTag(){
-        def tag = sh script: 'git rev-parse --short HEAD', returnStdout: true
-        return tag
-        }
 pipeline{
     agent none
 
@@ -16,7 +12,7 @@ pipeline{
             steps{
                 script{
                     withSonarQubeEnv(credentialsId: 'sonar-token') {
-                            sh "mvn clean sonar:sonar"
+                            sh "mvn sonar:sonar -X"
                         }
         stage("Quality Gate"){
             timeout(5) {
