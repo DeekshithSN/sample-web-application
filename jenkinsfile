@@ -18,25 +18,12 @@ pipeline{
                 def qg = waitForQualityGate()
                 if (qg.status != 'OK') {
                     error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                }
-            }
-            }
-        stage("build"){
-            agent{
-                docker{
-                    image 'maven'
-                }
-            }
-            steps{
-                script{
-                    sh "mvn clean install"
+                    }
+                }   
+        }                
                 }
             }
         }
-                
-            }
-        }
-    }
     }
 
 }
