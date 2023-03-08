@@ -15,7 +15,7 @@ pipeline{
                         }
                     timeout(5){
                         def qg = waitForQualityGate()
-                        if (qg.status != 'OK'){
+                        if (qg.status != "OK"){
                             error "code didn't meet quality gate"
                         }
                     }
