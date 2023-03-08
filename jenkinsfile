@@ -20,9 +20,6 @@ pipeline{
                 if (qg.status != 'OK') {
                     error "Pipeline aborted due to quality gate failure: ${qg.status}"
                     }
-                    dir(env.WORKSPACE) {
-                        bat 'mvn -B -f proj\\pom.xml sonar:sonar'
-                                }
                 }   
         }                
                 }
