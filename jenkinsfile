@@ -11,7 +11,7 @@ pipeline{
             steps{
                 script{
                     withSonarQubeEnv(credentialsId: 'sonar-autho') {
-                            sh "mvn sonar:sonar -e"
+                            sh "mvn sonar:sonar -X"
                         }
         stage("Quality Gate"){
             timeout(time: 5, unit: 'MINUTES') {
