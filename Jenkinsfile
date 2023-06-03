@@ -12,18 +12,29 @@ pipeline {
         }
 
         stage('build'){
-            agent { label 'jenkins-java' }
+            agent {
+                docker {
+                   image python:3.7-buster
+                }
+            
+            }
             steps {
                 script {
-                        echo "this is build stage"
+                        sh " python -version"
                 }
             }
         }
 
         stage('deploy'){
+             agent {
+                docker {
+                   image python:3.9-buster
+                }
+            
+            }
             steps {
                 script {
-                        echo "this is build stage"
+                        sh " python -version"
                 }
             }
         }
