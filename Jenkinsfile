@@ -19,7 +19,7 @@ pipeline {
             }
         }
 
-        stage('test'){
+        stage('deploy'){
             steps {
                 script {
                         echo "this is build stage"
