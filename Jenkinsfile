@@ -14,7 +14,7 @@ pipeline {
         stage('build'){
             agent {
                 docker {
-                   image python:3.7-buster
+                   image 'python:3.7-buster'
                 }
             
             }
@@ -28,7 +28,7 @@ pipeline {
         stage('deploy'){
              agent {
                 docker {
-                   image python:3.9-buster
+                   image 'python:3.9-buster'
                 }
             
             }
