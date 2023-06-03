@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'jenkins-java' }
+    agent any
 
     stages {
         stage('clone'){
@@ -12,6 +12,7 @@ pipeline {
         }
 
         stage('build'){
+            agent { label 'jenkins-java' }
             steps {
                 script {
                         echo "this is build stage"
