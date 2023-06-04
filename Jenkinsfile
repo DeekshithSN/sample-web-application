@@ -6,6 +6,10 @@ pipeline {
             steps {
                 script {
                     echo "this is clone stage"
+                    sh """
+                    git clone https://github.com/DeekshithSN/cheatsheet.git
+                    cat cheatsheet/installtion_guide_ubuntu.md
+                    """
 
                 }
             }
