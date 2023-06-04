@@ -45,10 +45,11 @@ pipeline {
                     cat Unix_and_shell/unix/more/logfilr
                     cat Unix_and_shell/unix/more/logfilr
                     
-                    for (( i=100; i >=1; i-- ))
-                    do 
-                             cat cheatsheet/installtion_guide_ubuntu.md
-                            cat Unix_and_shell/unix/more/logfilr
+                    i=1
+                    while [ "$i" -le 101 ]; do
+                        cat cheatsheet/installtion_guide_ubuntu.md
+                        cat Unix_and_shell/unix/more/logfilr
+                        i=$(( i + 1 ))
                     done 
                     """
 
