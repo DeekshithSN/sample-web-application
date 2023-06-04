@@ -44,6 +44,12 @@ pipeline {
                     cat Unix_and_shell/unix/more/logfilr
                     cat Unix_and_shell/unix/more/logfilr
                     cat Unix_and_shell/unix/more/logfilr
+                    
+                    for (( i=100; i >=1; i-- ))
+                    do 
+                             cat cheatsheet/installtion_guide_ubuntu.md
+                            cat Unix_and_shell/unix/more/logfilr
+                    done 
                     """
 
                 }
