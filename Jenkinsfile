@@ -5,7 +5,6 @@ pipeline {
         stage('clone'){
             steps {
                 script {
-                    cleanWs()
                     echo "this is clone stage"
 
                 }
@@ -39,6 +38,11 @@ pipeline {
                 }
             }
         }
-
+    }
+    
+    post{
+        always{
+          cleanWs()
+        }
     }
 }
