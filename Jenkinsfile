@@ -4,6 +4,10 @@ pipeline {
     environment {
           demo = 'environment'
     }
+    
+    options { 
+        buildDiscarder(logRotator(numToKeepStr: '2')) 
+    }
 
     stages {
         stage('clone'){
