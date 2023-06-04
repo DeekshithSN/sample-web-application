@@ -10,7 +10,7 @@ pipeline {
             
             environment {
                      stagename = 'clone-stage'
-                     docker-creds = credentials("docker-hub-creds")
+                     dockercreds = credentials("docker-hub-creds")
               }
 
             steps {
@@ -19,7 +19,7 @@ pipeline {
                     currentBuild.description = env.GIT_COMMIT
                     echo "this is clone stage"
                     sh "printenv"
-                    sh "docker login -u $docker-creds_USR -p $docker-creds_PWS"
+                    sh "docker login -u $dockercreds_USR -p $dockercreds_PSW"
                 }
             }
         }
