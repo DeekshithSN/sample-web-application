@@ -44,5 +44,9 @@ pipeline {
         always{
           cleanWs()
         }
+        
+        failure {
+           echo "pipeline failed will be sending failure mail"
+        }
     }
 }
