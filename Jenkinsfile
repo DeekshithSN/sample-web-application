@@ -1,12 +1,16 @@
 pipeline {
     agent any
+    
+    environment {
+          demo = 'environment'
+    }
 
     stages {
         stage('clone'){
             steps {
                 script {
                     echo "this is clone stage"
-                 
+                    sh "printenv"
                 }
             }
         }
