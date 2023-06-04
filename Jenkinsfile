@@ -15,6 +15,7 @@ pipeline {
             steps {
                 script {
                     currentBuild.displayName = env.JOB_NAME + "#" +env.BUILD_NUMBER
+                    currentBuild.description = env.GIT_COMMIT
                     echo "this is clone stage"
                     sh "printenv"
                 }
