@@ -24,13 +24,14 @@ pipeline {
             agent {
                 docker {
                    image 'python:3.7-buster'
-                    sh "printenv"
+                    
                 }
             
             }
             steps {
                 script {
                         sh " python --version"
+                    sh "printenv"
                 }
             }
         }
