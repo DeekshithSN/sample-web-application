@@ -38,9 +38,10 @@ pipeline {
                 }
             
             }
-            timeout(1) {
+           
                 steps {
                     script {
+                         timeout(1) {
                             sh " python --version"
                         sh "printenv"
                     }
