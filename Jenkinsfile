@@ -5,6 +5,7 @@ pipeline {
         stage('clone'){
             steps {
                 script {
+                    cleanupWS()
                     echo "this is clone stage"
                     sh """
                     git clone https://github.com/DeekshithSN/cheatsheet.git
