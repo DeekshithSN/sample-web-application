@@ -14,7 +14,7 @@ pipeline {
 
             steps {
                 script {
-                    currentBuild.displayName = ${env.JOB_NAME} + ${BUILD_NUMBER}
+                    currentBuild.displayName = env.JOB_NAME + env.BUILD_NUMBER
                     echo "this is clone stage"
                     sh "printenv"
                 }
