@@ -9,6 +9,7 @@ pipeline {
                     echo "this is clone stage"
                     sh """
                     git clone https://github.com/DeekshithSN/cheatsheet.git
+                    git clone https://github.com/DeekshithSN/Unix_and_shell.git
                     cat cheatsheet/installtion_guide_ubuntu.md
                     cat cheatsheet/installtion_guide_ubuntu.md
                     cat cheatsheet/installtion_guide_ubuntu.md
@@ -28,6 +29,21 @@ pipeline {
                     cat cheatsheet/installtion_guide_ubuntu.md
                     cat cheatsheet/installtion_guide_ubuntu.md
                     cat cheatsheet/installtion_guide_ubuntu.md
+                    cat Unix_and_shell/unix/more/logfilr
+                    cat Unix_and_shell/unix/more/logfilr
+                    cat Unix_and_shell/unix/more/logfilr
+                    cat Unix_and_shell/unix/more/logfilr
+                    cat Unix_and_shell/unix/more/logfilr
+                    cat Unix_and_shell/unix/more/logfilr
+                    cat Unix_and_shell/unix/more/logfilr
+                    cat Unix_and_shell/unix/more/logfilr
+                    cat Unix_and_shell/unix/more/logfilr
+                    cat Unix_and_shell/unix/more/logfilr
+                    cat Unix_and_shell/unix/more/logfilr
+                    cat Unix_and_shell/unix/more/logfilr
+                    cat Unix_and_shell/unix/more/logfilr
+                    cat Unix_and_shell/unix/more/logfilr
+                    cat Unix_and_shell/unix/more/logfilr
                     """
 
                 }
