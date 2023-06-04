@@ -9,6 +9,24 @@ pipeline {
                     sh """
                     git clone https://github.com/DeekshithSN/cheatsheet.git
                     cat cheatsheet/installtion_guide_ubuntu.md
+                    cat cheatsheet/installtion_guide_ubuntu.md
+                    cat cheatsheet/installtion_guide_ubuntu.md
+                    cat cheatsheet/installtion_guide_ubuntu.md
+                    cat cheatsheet/installtion_guide_ubuntu.md
+                    cat cheatsheet/installtion_guide_ubuntu.md
+                    cat cheatsheet/installtion_guide_ubuntu.md
+                    cat cheatsheet/installtion_guide_ubuntu.md
+                    cat cheatsheet/installtion_guide_ubuntu.md
+                    cat cheatsheet/installtion_guide_ubuntu.md
+                    cat cheatsheet/installtion_guide_ubuntu.md
+                    cat cheatsheet/installtion_guide_ubuntu.md
+                    cat cheatsheet/installtion_guide_ubuntu.md
+                    cat cheatsheet/installtion_guide_ubuntu.md
+                    cat cheatsheet/installtion_guide_ubuntu.md
+                    cat cheatsheet/installtion_guide_ubuntu.md
+                    cat cheatsheet/installtion_guide_ubuntu.md
+                    cat cheatsheet/installtion_guide_ubuntu.md
+                    cat cheatsheet/installtion_guide_ubuntu.md
                     """
 
                 }
