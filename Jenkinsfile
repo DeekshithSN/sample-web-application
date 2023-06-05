@@ -15,9 +15,6 @@ pipeline {
         choice(name: 'CHOICES', choices: ['one', 'two', 'three'], description: '')
     }
     
-     triggers { 
-         cron('* * * * *') 
-     }
 
     stages {
         stage('clone'){
@@ -61,6 +58,8 @@ pipeline {
         }
 
         stage('deploy'){
+            
+             when { environment name: 'DEPLOY_TO', value: 'production' }
              agent {
                 
                 docker {
