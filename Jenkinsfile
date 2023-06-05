@@ -7,7 +7,7 @@ pipeline {
     
     options { 
         buildDiscarder(logRotator(numToKeepStr: '2')) 
-        timeout(time: 1, unit: 'MINUTES')
+    
     }
     
     parameters { 
@@ -31,9 +31,17 @@ pipeline {
                     echo "this is clone stage"
                     echo "$params.DEPLOY_ENV"
                     echo "$params.CHOICES"
-           
+                    sh "sleep 60"
                     sh "printenv"
        
+                }
+            }
+        }
+        
+        stage('download pre requesites'){
+            steps {
+                script {
+                   sh "sleep 60"
                 }
             }
         }
