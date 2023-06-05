@@ -9,6 +9,11 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '2')) 
         timeout(time: 1, unit: 'MINUTES')
     }
+    
+    parameters { 
+        string(name: 'DEPLOY_ENV', defaultValue: 'staging', description: '') 
+        choice(name: 'CHOICES', choices: ['one', 'two', 'three'], description: '')
+    }
 
     stages {
         stage('clone'){
@@ -23,6 +28,8 @@ pipeline {
                     currentBuild.displayName = env.JOB_NAME + "#" +env.BUILD_NUMBER
                     currentBuild.description = env.GIT_COMMIT
                     echo "this is clone stage"
+                    echo "$params.DEPLOY_ENV"
+                    echo "$params.CHOICES"
                     sh "sleep 65"
                     sh "printenv"
                     sh "docker login -u $dockercreds_USR -p $dockercreds_PSW"
