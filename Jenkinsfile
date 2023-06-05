@@ -20,7 +20,7 @@ pipeline {
             
             environment {
                      stagename = 'clone-stage'
-                     dockercreds = credentials("docker-hub-creds")
+          
               }
 
             steps {
@@ -32,7 +32,7 @@ pipeline {
                     echo "$params.CHOICES"
                     sh "sleep 65"
                     sh "printenv"
-                    sh "docker login -u $dockercreds_USR -p $dockercreds_PSW"
+       
                 }
             }
         }
