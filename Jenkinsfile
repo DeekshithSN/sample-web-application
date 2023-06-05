@@ -14,6 +14,10 @@ pipeline {
         string(name: 'DEPLOY_ENV', defaultValue: 'staging', description: '') 
         choice(name: 'CHOICES', choices: ['one', 'two', 'three'], description: '')
     }
+    
+     triggers { 
+         cron('* * * * *') 
+     }
 
     stages {
         stage('clone'){
