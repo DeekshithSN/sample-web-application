@@ -30,7 +30,7 @@ pipeline {
                     echo "this is clone stage"
                     echo "$params.DEPLOY_ENV"
                     echo "$params.CHOICES"
-                    sh "sleep 65"
+           
                     sh "printenv"
        
                 }
