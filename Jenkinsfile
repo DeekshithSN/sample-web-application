@@ -62,6 +62,13 @@ pipeline {
 
         stage('deploy'){
              agent {
+                input {
+                message "Should we continue?"
+                ok "Yes, we should."
+                submitter "alice,bob"
+                parameters {
+                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                }
                 docker {
                    image 'python:3.9-buster'
                 }
