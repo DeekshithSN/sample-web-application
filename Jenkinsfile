@@ -17,6 +17,9 @@ pipeline {
     
 
     stages {
+        
+        stage('Parallel In Sequential') {
+         parallel {
         stage('clone'){
             
             environment {
@@ -44,6 +47,8 @@ pipeline {
                    sh "sleep 60"
                 }
             }
+        }
+         }
         }
 
         stage('build'){
