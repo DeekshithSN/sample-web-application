@@ -72,6 +72,11 @@
             <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>
         <div class="col-md-4">
+            <h2>Kubernetes</h2>
+            <p>Kubernetes is a free and open source automation server. Jenkins helps to automate the non-human part of the software development process, with continuous integration and facilitating technical aspects of continuous delivery</p>
+            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
             <h2>Maven</h2>
             <p>Maven is a build automation tool used primarily for Java projects. Maven can also be used to build and manage projects written in C#, Ruby, Scala, and other languages.</p>
             <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
