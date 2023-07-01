@@ -50,6 +50,7 @@ pipeline {
             steps {
                 script {
                     sh """
+                    pwd
                     docker build . -t deekshithsn/java-app-hbc:\$Docker_tag
                     """
                 }
