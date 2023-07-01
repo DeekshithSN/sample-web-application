@@ -39,45 +39,44 @@ pipeline{
             }
         }
 
-        // stage('docker build'){
-        //     steps{
-        //         script{
-        //             sh """
-        //             cp -r ../$JOB_BASE_NAME@2/target .
-        //             docker build . -t 34.125.26.221:8083/sample-app:$Docker_tag
-        //             """
-        //         }
-        //     }
-        // }
+        stage('docker build'){
+            steps{
+                script{
+                    sh """
+                    docker build . -t deekshithsn/java-app-hbc:$Docker_tag
+                    """
+                }
+            }
+        }
 
         
-        // stage('docker login & push'){
-        //     steps{
-        //         script{
-        //             sh """
-        //                docker login -u admin -p $docker_pws 34.125.26.221:8083
-        //                docker push 34.125.26.221:8083/sample-app:$Docker_tag
-        //             """
-        //             addBadge(icon: 'save.gif', text: 'docker repo', link: 'http://34.125.26.221:8081/#browse/browse:docker-hosted:v2%2Fsample-app')
-        //             currentBuild.description = "sample-app:$Docker_tag"
-        //         }
-        //     }
-        // }
+        stage('docker login & push'){
+            steps{
+                script{
+                    sh """
+                       docker login -u deekshithsn -p $docker_pws 
+                       docker push deekshithsn/java-app-hbc:$Docker_tag
+                    """
+                    addBadge(icon: 'save.gif', text: 'docker repo', link: 'https://hub.docker.com/repository/docker/deekshithsn/java-app-hbc')
+                    currentBuild.description = "deekshithsn/java-app-hbc:$Docker_tag"
+                }
+            }
+        }
 
-        // stage('deploy the application'){
-        //     steps{
-        //         script{
-        //             configFileProvider([configFile(fileId: 'kube-dev-config', variable: 'KUBECONFIG')]) {
-        //                 sh '''
-        //                     kubectl get po
-        //                     final_tag=$(echo $Docker_tag | tr -d ' ')
-        //                     sed -i "s|TAG|$final_tag|" deployment.yaml
-        //                     cat deployment.yaml
-        //                 '''
-        //             }
-        //         }
-        //     }
-        // }
+        stage('deploy the application'){
+            steps{
+                script{
+                    configFileProvider([configFile(fileId: 'kube-dev-config', variable: 'KUBECONFIG')]) {
+                        sh '''
+                            kubectl get po
+                            final_tag=$(echo $Docker_tag | tr -d ' ')
+                            sed -i "s|TAG|$final_tag|" deployment.yaml
+                            cat deployment.yaml
+                        '''
+                    }
+                }
+            }
+        }
 
     }
 
