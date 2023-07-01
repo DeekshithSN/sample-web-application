@@ -20,7 +20,7 @@ pipeline{
             steps{
                 script{
                    sh "echo executing sonar scan"
-                   sh "sleep 90"
+                   // sh "sleep 90"
                 }
             }
         }
