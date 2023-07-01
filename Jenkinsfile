@@ -38,6 +38,11 @@ pipeline {
                 }
             }
         }
+       stage('Debug') {
+         steps {
+          sh 'ls -al'
+          }
+          }
 
         stage('docker build') {
             steps {
