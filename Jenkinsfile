@@ -66,14 +66,10 @@ pipeline{
         stage('deploy the application'){
             steps{
                 script{
-                    configFileProvider([configFile(fileId: 'kube-dev-config', variable: 'KUBECONFIG')]) {
-                        sh '''
-                            kubectl get po
-                            final_tag=$(echo $Docker_tag | tr -d ' ')
-                            sed -i "s|TAG|$final_tag|" deployment.yaml
-                            cat deployment.yaml
-                        '''
-                    }
+                    sh """
+                    docker rm $( docker stop $( docker ps -aq))
+                    docker run -d -p 9000:8080 deekshithsn/java-app-hbc:$Docker_tag
+                    """
                 }
             }
         }
