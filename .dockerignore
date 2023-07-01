@@ -1,0 +1,12 @@
+# Ignore specific files or directories when building the Docker image
+
+# Exclude the following files and directories
+.git
+.idea
+.vscode
+node_modules
+
+# Exclude all files and directories inside the target directory
+# ! allows including specific files or directories even if they are excluded by a pattern
+target/*
+!target/WebApp.war
