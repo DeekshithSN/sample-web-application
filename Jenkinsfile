@@ -40,7 +40,9 @@ pipeline {
         }
        stage('Debug') {
          steps {
-          sh 'ls -al'
+          sh 'ls -al '
+          sh 'cd src/ '   
+          sh 'ls -al '   
           }
           }
 
