@@ -1,5 +1,6 @@
 # Use a base image with Java and Tomcat installed
 FROM tomcat:9-jdk11
+USER root
 
 # Remove the default ROOT application
 RUN rm -rf /usr/local/tomcat/webapps/ROOT
