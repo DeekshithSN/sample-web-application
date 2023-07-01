@@ -51,6 +51,7 @@ pipeline {
                 script {
                     sh """
                     pwd
+                    cp -r ../workspace@2/target .
                     docker build . -t deekshithsn/java-app-hbc:\$Docker_tag
                     """
                 }
