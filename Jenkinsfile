@@ -7,7 +7,7 @@ pipeline{
     agent any
     environment{
         Docker_tag = getDockerTag()
-        docker_pws = credentials('docker-password')
+        docker_pws = credentials('docker-hub-password')
     }
     stages{
         stage("Sonar scan"){
