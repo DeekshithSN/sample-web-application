@@ -1,18 +1,13 @@
-# Use a base image with Java and Tomcat installed
 FROM tomcat:9-jdk11
-USER root
 
 # Remove the default ROOT application
 RUN rm -rf /usr/local/tomcat/webapps/ROOT
 
-# Copy the WebApp.war file into the Tomcat webapps directory and rename it to ROOT.war
-# COPY target/WebApp.war /usr/local/tomcat/webapps/ROOT.war
-# COPY ../WebApp.war /usr/local/tomcat/webapps/ROOT.war
-COPY ../WebApp.war /usr/local/tomcat/webapps/ROOT.war
+# Add your application WAR file to the webapps directory
+COPY target/WebApp.war /usr/local/tomcat/webapps/ROOT.war
 
+# Optional: If your application requires additional configuration or dependencies,
+# you can add them here
 
-# Expose port 8080 for Tomcat
-EXPOSE 8080
-
-# Start Tomcat when the container launches
-CMD ["catalina.sh", "run"]
+# Set the user to run the container
+USER 1001
