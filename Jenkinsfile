@@ -30,7 +30,7 @@ pipeline {
 
         steps {
           script {
-            sh "node -version "
+            sh "node -v "
           }
         }
       }
