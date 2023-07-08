@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-      label 'java'
-    }
+    agent any
 
     stages{
 
@@ -16,6 +14,8 @@ pipeline {
           script {
             sh "echo clone stage"
             sh "java -version"
+            sh "printenv"
+            currentBuild.displayName = $GIT_COMMIT
           }
         }
       }
@@ -43,10 +43,35 @@ pipeline {
         }
         steps {
           script {
-            sh "python -h"
+            sh "python -h > python.txt"
+          }
+        }
+
+        post{
+          always{
+              archiveArtifacts 'python.txt'
           }
         }
       }
 
     } 
+
+    post{
+
+      always {
+        cleanWs()
+      }
+
+      success {
+            echo "success"
+           
+      }
+
+      failure {
+          echo "failure"
+      }
+
+    }
+
+
 }
