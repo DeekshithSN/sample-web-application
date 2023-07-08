@@ -8,7 +8,7 @@ pipeline {
       stage('clone') {
         agent {
           docker {
-             image '8u111-jdk-alpine'
+             image 'openjdk'
           }
         }
 
