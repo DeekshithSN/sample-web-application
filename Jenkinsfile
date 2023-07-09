@@ -15,7 +15,7 @@ pipeline {
             sh "echo clone stage"
             sh "java -version"
             sh "printenv"
-            currentBuild.displayName = $GIT_COMMIT
+            currentBuild.description = ${GIT_COMMIT}
           }
         }
       }
