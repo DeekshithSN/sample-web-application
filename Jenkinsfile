@@ -3,22 +3,17 @@ pipeline {
     environment{
       CC = 'clang'
       toolname = 'jenkins'
+      dockerpass = credentials('docker-user-pass')
     }
 
     stages{
 
-      stage('clone') {
-        agent {
-          docker {
-             image 'openjdk'
-          }
-        }
+      stage('docker login') {
 
         steps {
           script {
             sh "echo clone stage"
-            sh "java -version"
-            sh "printenv"
+            sh "docker login -u deekshithsn -p ${env.dockerpass}"
             currentBuild.description = "${env.GIT_COMMIT}"
           }
         }
