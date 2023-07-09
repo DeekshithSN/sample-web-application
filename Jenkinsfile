@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment{
+      CC = 'clang'
+      class = 'jenkins'
+    }
 
     stages{
 
