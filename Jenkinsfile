@@ -6,14 +6,20 @@ pipeline {
       dockerpass = credentials('docker-user-pass')
     }
 
+    options{
+      buildDiscarder(logRotator(numToKeepStr: '2'))
+    }
+
     stages{
 
       stage('docker login') {
-
+        options {
+              retry (3)
+            }
         steps {
           script {
             sh "echo clone stage"
-            sh "docker login -u $dockerpass_USR -p $dockerpass_PSW"
+            sh "docker login -u ghjjjj -p $dockerpass_PSW"
             currentBuild.description = "${env.GIT_COMMIT}"
           }
         }
