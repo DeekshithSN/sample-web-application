@@ -31,10 +31,13 @@ pipeline {
              image 'node'
           }
         }
-
+        environment{
+          place = 'bengaluru'
+        }
         steps {
           script {
             sh "node -v "
+            sh "printenv"
           }
         }
       }
@@ -48,6 +51,7 @@ pipeline {
         steps {
           script {
             sh "python -h > python.txt"
+            sh "printenv"
           }
         }
 
