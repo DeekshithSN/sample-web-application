@@ -21,6 +21,7 @@ pipeline {
           script {
             sh "echo clone stage"
             sh "docker login -u deekshithsn -p $dockerpass_PSW"
+            sh "sleep 60"
             currentBuild.description = "${env.GIT_COMMIT}"
           }
         }
