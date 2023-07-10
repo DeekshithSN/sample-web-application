@@ -22,36 +22,39 @@ pipeline {
     }
 
     stages{
-
-      stage('docker login') {
-        options {
-              retry (3)
+      stage('Parallel Stage') { 
+         parallel { 
+          stage('docker login') {
+            options {
+                  retry (3)
+                }
+            
+            steps {
+              script {
+                sh "echo clone stage"
+                sh "docker login -u deekshithsn -p $dockerpass_PSW"
+      
+                currentBuild.description = "${env.GIT_COMMIT}"
+              }
             }
-        
-        steps {
-          script {
-            sh "echo clone stage"
-            sh "docker login -u deekshithsn -p $dockerpass_PSW"
-   
-            currentBuild.description = "${env.GIT_COMMIT}"
           }
-        }
-      }
 
 
-      stage('build') {
-        agent {
-          docker {
-             image 'node'
-          }
-        }
-        environment{
-          place = 'bengaluru'
-        }
-        steps {
-          script {
-            sh "node -v "
-            sh "printenv"
+          stage('build') {
+            agent {
+              docker {
+                image 'node'
+              }
+            }
+            environment{
+              place = 'bengaluru'
+            }
+            steps {
+              script {
+                sh "node -v "
+                sh "printenv"
+              }
+            }
           }
         }
       }
