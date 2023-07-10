@@ -12,6 +12,11 @@ pipeline {
       timestamps()
     }
 
+    parameters { 
+      string(name: 'DEPLOY_ENV', defaultValue: 'staging', description: '') 
+      choice(name: 'ENV', choices: ['dev', 'qa', 'prod'], description: '')
+    }
+
     stages{
 
       stage('docker login') {
