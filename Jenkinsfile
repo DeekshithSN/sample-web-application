@@ -64,6 +64,7 @@ pipeline {
       }
 
       stage('deploy') {
+        when { environment name: 'DEPLOY_ENV', value: 'production' }
         agent {
           docker {
              image 'python'
