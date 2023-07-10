@@ -58,7 +58,7 @@ pipeline {
 
       stage('deploy') {
         when { 
-          allOf {
+          anyOf {
           environment name: 'DEPLOY_ENV', value: 'production';
           environment name: 'GIT_BRANCH', value: 'master'
           }
