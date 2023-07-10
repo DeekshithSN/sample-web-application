@@ -17,6 +17,10 @@ pipeline {
       choice(name: 'ENV', choices: ['dev', 'qa', 'prod'], description: '')
     }
 
+    triggers { 
+      pollSCM('H */4 * * 1-5')
+    }
+
     stages{
 
       stage('docker login') {
