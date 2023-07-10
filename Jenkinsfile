@@ -27,14 +27,7 @@ pipeline {
         options {
               retry (3)
             }
-        input {
-                message "Should we continue?"
-                ok "Yes, we should."
-                submitter "alice,bob"
-                parameters {
-                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-                }
-        }
+        
         steps {
           script {
             sh "echo clone stage"
@@ -64,7 +57,12 @@ pipeline {
       }
 
       stage('deploy') {
-        when { environment name: 'DEPLOY_ENV', value: 'production' }
+        when { 
+          allOf {
+          environment name: 'DEPLOY_ENV', value: 'production';
+          environment name: 'GIT_BRANCH', value: 'master'
+          }
+        }
         agent {
           docker {
              image 'python'
