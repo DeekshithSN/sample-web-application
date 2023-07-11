@@ -1,4 +1,4 @@
-name: CI Java App
+name: Lint the code
 on:
   workflow_dispatch
 jobs:
