@@ -12,6 +12,6 @@ and build the instruction .
 
 Deploy ```target/WebApp.war``` on Tomcat properly for better experience.
 
-#DevOps
+# DevOps
 Practicing some basic CI/CD on this project 
 
