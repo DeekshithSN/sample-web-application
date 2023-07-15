@@ -53,6 +53,7 @@ pipeline {
     stage("docker build"){
       steps{
         script{
+          sh 'cp -r ../java-app-pipeline@2/target .'
           sh "docker build -t web-app ."
         }
       }
