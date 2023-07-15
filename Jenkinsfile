@@ -50,5 +50,13 @@ pipeline {
         }
       }
 
+    stage("docker build"){
+      steps{
+        script{
+          sh "docker build -t web-app ."
+        }
+      }
+    }
+
     }
 }
