@@ -87,9 +87,13 @@ pipeline {
       steps{
         script {
           configFileProvider([configFile(fileId: 'kube-config', variable: 'KUBECONFIG')]) {
-            sh 'sed -i "s:IMAGE_NAME:deekshithsn/web-app:$docker_tag:g" deployment.yaml'
-            sh "kubectl apply -f deployment.yaml"
-            sh "kubectl get po,svc"
+            
+            sh '''
+            final_tag=$(echo $docker_tag | tr -d ' ')
+            sed -i "s:IMAGE_NAME:deekshithsn/web-app:$final_tag:g" deployment.yaml
+            kubectl apply -f deployment.yaml
+            kubectl get po,svc
+            '''
           }
         }
       }
