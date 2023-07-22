@@ -98,7 +98,20 @@ pipeline {
           }
         }
       }
+
+      post {
+        always{
+          archiveArtifacts artifacts: 'deployment.yaml', followSymlinks: false
+        }
+      }
     }
 
     }
+
+    post{
+      always{
+        cleanWs()
+      }
+    }
+
 }
