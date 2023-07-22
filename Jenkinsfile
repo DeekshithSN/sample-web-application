@@ -65,7 +65,7 @@ pipeline {
       steps{
         script{
           sh 'cp -r ../java-app-pipeline@2/target .'
-          sh "docker build . -t web-app:$docker_tag"
+          sh "docker build . -t deekshithsn/web-app:$docker_tag"
         }
       }
     }
@@ -75,9 +75,9 @@ pipeline {
         script{
           sh """
               docker login -u $docker_auth_USR -p $docker_auth_PSW
-              docker push web-app:$docker_tag
+              docker push deekshithsn/web-app:$docker_tag
           """
-          currentBuild.description = "image name: web-app:$docker_tag"
+          currentBuild.description = "image name: deekshithsn/web-app:$docker_tag"
         }
       }
     }
