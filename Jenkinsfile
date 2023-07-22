@@ -90,7 +90,7 @@ pipeline {
             
             sh '''
             final_tag=$(echo $docker_tag | tr -d ' ')
-            sed -i "s:IMAGE_NAME:deekshithsn/web-app:$final_tag:g" deployment.yaml
+            sed -i "s|IMAGE_NAME|deekshithsn/web-app:$final_tag|g" deployment.yaml
             kubectl apply -f deployment.yaml
             kubectl get po,svc
             '''
