@@ -82,5 +82,18 @@ pipeline {
       }
     }
 
+
+    stage("deploying it to k8s cluster"){
+      steps{
+        script {
+          configFileProvider([configFile(fileId: 'kube-config', variable: 'KUBECONFIG')]) {
+            sh 'sed -i "s:IMAGE_NAME:deekshithsn/web-app:$docker_tag:g" deployment.yaml'
+            sh "kubectl apply -f deployment.yaml"
+            sh "kubectl get po,svc"
+          }
+        }
+      }
+    }
+
     }
 }
