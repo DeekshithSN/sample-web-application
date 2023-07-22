@@ -9,6 +9,7 @@ pipeline {
 
     environment{
       docker_tag = getDockerTag()
+      docker_auth = credentials('docker-creds')
     }
 
     stages {
@@ -65,6 +66,18 @@ pipeline {
         script{
           sh 'cp -r ../java-app-pipeline@2/target .'
           sh "docker build . -t web-app:$docker_tag"
+        }
+      }
+    }
+
+    stage("docker push stage"){
+      steps{
+        script{
+          sh """
+              docker login -u $docker_auth_USR -p $docker_auth_PSW
+              docker push web-app:$docker_tag
+          """
+          currentBuild.description = "image name: web-app:$docker_tag"
         }
       }
     }
