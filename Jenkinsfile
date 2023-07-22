@@ -1,5 +1,15 @@
+def getDockerTag(){
+    def tag = sh script: 'git rev-parse --short HEAD', returnStdout: true
+    return tag
+  }
+
+
 pipeline {
     agent any 
+
+    environment{
+      docker_tag = getDockerTag()
+    }
 
     stages {
 
@@ -54,7 +64,7 @@ pipeline {
       steps{
         script{
           sh 'cp -r ../java-app-pipeline@2/target .'
-          sh "docker build -t web-app ."
+          sh "docker build -t web-app:$docker_tag ."
         }
       }
     }
