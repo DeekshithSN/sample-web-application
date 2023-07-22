@@ -94,6 +94,7 @@ pipeline {
             kubectl apply -f deployment.yaml
             kubectl get po,svc
             '''
+            addBadge(icon: 'info.gif', link: 'http://34.125.246.72:31884/')
           }
         }
       }
