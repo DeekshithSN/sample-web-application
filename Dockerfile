@@ -1,4 +1,4 @@
-FROM circleci/jdk8 as base
+FROM maven:3.8.6-openjdk-8 as base
 WORKDIR /app
 COPY . .
 RUN RUN apt-get update && apt-get install -y maven
