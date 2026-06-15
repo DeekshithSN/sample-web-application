@@ -1,6 +1,13 @@
 pipeline {
     agent any
 
+    environment { 
+        CC = 'clang'
+        CXX = 'clang++'
+        CFLAGS = '-Wall -Wextra'
+        CXXFLAGS = '-Wall -Wextra -std=c++17'
+    }
+
     stages{
       stage("build"){
         steps{
@@ -16,6 +23,9 @@ pipeline {
       stage("test"){
         steps{
           echo "Running tests..."
+          sh '''
+            echo "The current build number is ${env.CXXFLAGS}."
+          '''
         }
       }
       stage("deploy"){
