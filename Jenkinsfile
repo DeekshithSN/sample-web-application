@@ -24,7 +24,8 @@ pipeline {
         steps{
           echo "Running tests..."
           sh '''
-            echo "The current build number is ${env.CXXFLAGS}."
+            # Use the exported environment variable CXXFLAGS in the shell
+            echo "The current CXXFLAGS is $CXXFLAGS."
           '''
         }
       }
