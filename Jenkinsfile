@@ -5,6 +5,7 @@ pipeline {
       stage("build"){
         steps{
           echo "Building the application..."
+          sh "printenv"
         }
       }
       stage("test"){
