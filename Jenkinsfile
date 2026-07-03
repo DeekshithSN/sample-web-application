@@ -10,7 +10,7 @@ pipeline {
           steps {
               script {
                   // Securely inject the credentials you created
-                  withCredentials([usernamePassword(credentialsId: 'my-git-api-token', passwordVariable: 'GIT_TOKEN', usernameVariable: 'GIT_USER')]) {
+                  withCredentials([usernamePassword(credentialsId: 'github-token', passwordVariable: 'GIT_TOKEN', usernameVariable: 'GIT_USER')]) {
                       
                       // Define your target repo details
                       def orgOrUser = "DeekshithSN"
@@ -25,7 +25,7 @@ pipeline {
                       def json = readJSON text: response
                       def branchList = json.collect { it.name }
                       
-                      echo "Available branches in ${repoName}: ${branchList}"
+                      echo "Available branches in ${PROJECT_NAME}: ${branchList}"
                   }
               }
           }
