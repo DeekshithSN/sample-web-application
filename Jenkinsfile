@@ -17,6 +17,16 @@ pipeline {
                 }
             }
         }
+
+        stage('Check Dependencies') {
+            steps {
+                script {
+                    echo "Verifying external service availability..."
+                    sh "chmod +x scripts/check_dependencies.sh"
+                    sh "./scripts/check_dependencies.sh"
+                }
+            }
+        }
         
         stage('Static code analysis') { 
             steps { 
