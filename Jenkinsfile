@@ -48,6 +48,15 @@ pipeline {
                 }
             }
         }
+
+        stage('Build & Test') {
+            steps {
+                script {
+                    echo "Building the application..."
+                    sh "mvn clean install"
+                }
+            }
+        }
     }
 
   post {
