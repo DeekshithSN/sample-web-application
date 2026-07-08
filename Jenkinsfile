@@ -57,6 +57,15 @@ pipeline {
                 }
             }
         }
+
+        stage('docker build & push') {
+            steps {
+                script {
+                    echo "Building Docker image..."
+                    sh "docker build -t myapp:${BUILD_NUMBER} ."
+                }
+            }
+        }
     }
 
   post {
