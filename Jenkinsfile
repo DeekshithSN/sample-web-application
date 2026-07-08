@@ -1,5 +1,14 @@
+
+def getDockerTag(){
+        def tag = sh script: 'git rev-parse HEAD', returnStdout: true
+        return tag
+      }
+
 pipeline {
     agent { label 'linux' }
+    environment{
+	    Docker_tag = getDockerTag()
+        }
     stages {
         stage('Validation & Checks') {
             parallel {
@@ -62,7 +71,7 @@ pipeline {
             steps {
                 script {
                     echo "Building Docker image..."
-                    sh "docker build -t myapp:${BUILD_NUMBER} ."
+                    sh "docker build -t myapp:${Docker_tag} ."
                 }
             }
         }
