@@ -83,6 +83,7 @@ pipeline {
             steps {
                 script {
                     echo "Authenticating to ECR..."
+                    sh "apt-get update && apt-get install -y awscli" // Ensure AWS CLI is installed
                     sh "aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${account_id}.dkr.ecr.${region}.amazonaws.com"
                     echo "Pushing Docker image to ECR..."
                     sh "docker tag myapp:${Docker_tag} ${account_id}.dkr.ecr.${region}.amazonaws.com/myapp:${Docker_tag}"
