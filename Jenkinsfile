@@ -5,9 +5,13 @@ def getDockerTag(){
 
 pipeline {
     agent { label 'linux' }
-    environment{
-	    Docker_tag = getDockerTag()
-        }
+
+    environment {
+        Docker_tag = getDockerTag()
+        account_id = "941277531445" // Replace with your actual AWS account ID
+        region = "ap-south-1" // Replace with your desired AWS region
+    }
+
     stages {
         stage('Validation & Checks') {
             parallel {
@@ -66,7 +70,7 @@ pipeline {
             }
         }
 
-        stage('docker build & push') {
+        stage('docker build') {
             steps {
                 script {
                     echo "Building Docker image..."
@@ -74,6 +78,19 @@ pipeline {
                 }
             }
         }
+
+        stage('Authentication of ECR and push the image') {
+            steps {
+                script {
+                    echo "Authenticating to ECR..."
+                    sh "aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${account_id}.dkr.ecr.${region}.amazonaws.com"
+                    echo "Pushing Docker image to ECR..."
+                    sh "docker tag myapp:${Docker_tag} ${account_id}.dkr.ecr.${region}.amazonaws.com/myapp:${Docker_tag}"
+                    sh "docker push ${account_id}.dkr.ecr.${region}.amazonaws.com/myapp:${Docker_tag}"
+                }
+            }
+        }
+
     }
 
   post {
