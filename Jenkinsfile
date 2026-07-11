@@ -91,6 +91,18 @@ pipeline {
             }
         }
 
+        stage('prepare manifest files and check connection with k8s cluster') {
+            steps {
+                script {
+                    echo "Deploying to Kubernetes..."
+                    sh "sed -i 's|image_name|${account_id}.dkr.ecr.${region}.amazonaws.com/myapp:${Docker_tag}|g' deployment.yaml"
+                    // Check connection to Kubernetes cluster
+                    sh "kubectl get po"
+                }
+            }
+        }
+
+
     }
 
   post {
