@@ -1,15 +1,15 @@
 FROM alpine:3.18
 
-# Install dependencies (curl, openssl, groff for AWS CLI documentation pagination)
-RUN apk add --no-cache curl openssl groff jq bash
+# 1. Install dependencies AND the glibc compatibility layers (gcompat, libc6-compat)
+RUN apk add --no-cache curl openssl groff jq bash gcompat libc6-compat
 
-# 1. Install AWS CLI v2
+# 2. Install AWS CLI v2
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
     && unzip awscliv2.zip \
     && ./aws/install \
     && rm -rf awscliv2.zip ./aws
 
-# 2. Install kubectl (Replace v1.28.0 with your exact cluster version)
+# 3. Install kubectl
 RUN curl -LO "https://dl.k8s.io/release/v1.28.0/bin/linux/amd64/kubectl" \
     && chmod +x ./kubectl \
     && mv ./kubectl /usr/local/bin/kubectl
