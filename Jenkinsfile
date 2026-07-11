@@ -94,7 +94,8 @@ pipeline {
         stage('prepare manifest files and check connection with k8s cluster') {
           agent {
                 docker {
-                    image 'bitnami/kubectl:latest' // You can replace this with your specific image name/tag
+                    image 'bitnami/kubectl:latest'
+                    args '--entrypoint=""'
                     reuseNode true                // Ensures it runs on the same 'linux' workspace node
                 }
             }
