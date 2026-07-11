@@ -120,6 +120,7 @@ pipeline {
                     sh "aws eks update-kubeconfig --region ${region} --name ${cluster_name}"
                     sh "kubectl get po"
                     sh "kubectl apply -f deployment.yaml"
+                    sh "kubectl rollout status deployment/devops-training"
                 }
             }
         }
