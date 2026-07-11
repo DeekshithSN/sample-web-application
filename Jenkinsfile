@@ -119,6 +119,7 @@ pipeline {
                     echo "Checking connection to Kubernetes cluster..."
                     sh "aws eks update-kubeconfig --region ${region} --name ${cluster_name}"
                     sh "kubectl get po"
+                    sh "kubectl apply -f deployment.yaml"
                 }
             }
         }
