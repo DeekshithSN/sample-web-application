@@ -94,11 +94,17 @@ pipeline {
 
         stage('prepare manifest files and check connection with k8s cluster') {
           agent {
-                docker {
-                    image 'bitnami/kubectl:latest'
-                    args '--entrypoint=""'
-                    reuseNode true                // Ensures it runs on the same 'linux' workspace node
+                dockerfile {
+                    filename 'Dockerfile-Jenkins' // Specify the Dockerfile to use for the Jenkins agent
+                    // The args line bypasses entrypoint blocks so Jenkins can run sh commands
+                    args '--entrypoint=""' 
+                    reuseNode true
                 }
+                // docker {
+                //     image 'bitnami/kubectl:latest'
+                //     args '--entrypoint=""'
+                //     reuseNode true                // Ensures it runs on the same 'linux' workspace node
+                // }
             }
             steps { 
                 script {
