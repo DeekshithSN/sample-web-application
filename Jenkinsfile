@@ -10,6 +10,7 @@ pipeline {
         Docker_tag = getDockerTag()
         account_id = "941277531445" // Replace with your actual AWS account ID
         region = "ap-south-1" // Replace with your desired AWS region
+        cluster_name = "jenkins-k8s" // Replace with your EKS cluster name
     }
 
     stages {
@@ -106,6 +107,7 @@ pipeline {
                     sh "sed -i 's|image_name|${account_id}.dkr.ecr.${region}.amazonaws.com/myapp:${Docker_tag}|g' deployment.yaml"
                     // Check connection to Kubernetes cluster
                     echo "Checking connection to Kubernetes cluster..."
+                    sh "aws eks update-kubeconfig --region ${region} --name ${cluster_name}"
                     sh "kubectl get po"
                 }
             }
