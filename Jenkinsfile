@@ -106,6 +106,10 @@ pipeline {
                 //     reuseNode true                // Ensures it runs on the same 'linux' workspace node
                 // }
             }
+            environment {
+                // Point HOME to the current workspace directory so plugins/tools have write permissions
+                HOME = "${WORKSPACE}"
+            }
             steps { 
                 script {
                     echo "Deploying to Kubernetes..."
