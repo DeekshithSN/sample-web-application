@@ -101,6 +101,7 @@ pipeline {
             steps { 
                 script {
                     echo "Deploying to Kubernetes..."
+                    sh "ls -l"
                     sh "sed -i 's|image_name|${account_id}.dkr.ecr.${region}.amazonaws.com/myapp:${Docker_tag}|g' deployment.yaml"
                     // Check connection to Kubernetes cluster
                     echo "Checking connection to Kubernetes cluster..."
