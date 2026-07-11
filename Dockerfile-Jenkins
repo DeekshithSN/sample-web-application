@@ -1,7 +1,15 @@
-FROM alpine:3.18
+FROM ubuntu:22.04
 
-# 1. Install dependencies AND the glibc compatibility layers (gcompat, libc6-compat)
-RUN apk add --no-cache curl openssl groff jq bash gcompat libc6-compat
+# Prevent interactive prompts during installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# 1. Install standard dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    unzip \
+    groff \
+    jq \
+    && rm -rf /var/lib/apt/lists/*
 
 # 2. Install AWS CLI v2
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
@@ -9,7 +17,7 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
     && ./aws/install \
     && rm -rf awscliv2.zip ./aws
 
-# 3. Install kubectl
+# 3. Install kubectl (Matching standard cluster versions)
 RUN curl -LO "https://dl.k8s.io/release/v1.28.0/bin/linux/amd64/kubectl" \
     && chmod +x ./kubectl \
     && mv ./kubectl /usr/local/bin/kubectl
