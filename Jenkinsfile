@@ -92,7 +92,13 @@ pipeline {
         }
 
         stage('prepare manifest files and check connection with k8s cluster') {
-            steps {
+          agent {
+                docker {
+                    image 'bitnami/kubectl:latest' // You can replace this with your specific image name/tag
+                    reuseNode true                // Ensures it runs on the same 'linux' workspace node
+                }
+            }
+            steps { 
                 script {
                     echo "Deploying to Kubernetes..."
                     sh "sed -i 's|image_name|${account_id}.dkr.ecr.${region}.amazonaws.com/myapp:${Docker_tag}|g' deployment.yaml"
