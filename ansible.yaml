@@ -10,3 +10,4 @@
     command: kubectl apply -f /root/deployment.yaml
 
 
+
