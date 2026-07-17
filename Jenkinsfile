@@ -45,6 +45,39 @@ pipeline {
                 }
             }
         }
+
+        stage('Linting') {
+            parallel {
+                stage('Dockerfile Lint') {
+                    steps {
+                        script {
+                            echo "Linting Dockerfile using Hadolint..."
+                            // Uses Hadolint via Docker to check the Dockerfile
+                            sh "docker run --rm -i hadolint/hadolint < Dockerfile"
+                        }
+                    }
+                }
+                stage('Kubernetes Lint') {
+                    steps {
+                        script {
+                            echo "Linting Kubernetes Manifests using Kubeconform..."
+                            // Validates your deployment.yaml against Kubernetes schemas
+                            sh "docker run --rm -v \$(pwd):/project -w /project ghcr.io/yannh/kubeconform:latest deployment.yaml"
+                        }
+                    }
+                }
+                stage('Java Lint / Checkstyle') {
+                    steps {
+                        script {
+                            echo "Running Java Checkstyle via Maven..."
+                            // Runs Maven Checkstyle plugin to enforce coding standards
+                            sh "mvn checkstyle:check"
+                        }
+                    }
+                }
+            }
+        }
+
         stage('Static code analysis') {
             steps {
                 script {
