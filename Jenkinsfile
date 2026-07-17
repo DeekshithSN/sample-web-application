@@ -8,7 +8,7 @@ pipeline {
 
     environment {
         Docker_tag = getDockerTag()
-        account_id = "941277531445" // Replace with your actual AWS account ID
+        account_id = "941277531445" // Replace with your actual AWS account ID 
         region = "ap-south-1" // Replace with your desired AWS region
         cluster_name = "jenkins-k8s" // Replace with your EKS cluster name
     }
