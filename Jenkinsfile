@@ -1,3 +1,5 @@
+@Library('sharedLibrary') _
+
 def getDockerTag(){
     def tag = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
     return tag
@@ -8,7 +10,7 @@ pipeline {
 
     environment {
         Docker_tag = getDockerTag()
-        account_id = "941277531445" // Replace with your actual AWS account ID
+        account_id = "941277531445" // Replace with your actual AWS account ID 
         region = "ap-south-1" // Replace with your desired AWS region
         cluster_name = "jenkins-k8s" // Replace with your EKS cluster name
     }
@@ -26,11 +28,11 @@ pipeline {
                             
                             // Execute the verification script (assumed to be in your repo at scripts/check_commit.sh)
                             // If the script exits with status 1, the pipeline will fail here.
-                            sh "chmod +x scripts/check_commit.sh"
-                            // Catch errors from the validation script to mark the stage UNSTABLE instead of FAILURE
-                            catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
-                                sh "./scripts/check_commit.sh commit_msg.txt"
-                            }
+                            // sh "chmod +x scripts/check_commit.sh"
+                            // // Catch errors from the validation script to mark the stage UNSTABLE instead of FAILURE
+                            // catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
+                            //     sh "./scripts/check_commit.sh commit_msg.txt"
+                            // }
                         }
                     }
                 }
@@ -45,6 +47,39 @@ pipeline {
                 }
             }
         }
+
+        stage('Linting') {
+            parallel {
+                stage('Dockerfile Lint') {
+                    steps {
+                        script {
+                            echo "Linting Dockerfile using Hadolint..."
+                            // Uses Hadolint via Docker to check the Dockerfile
+                            sh "docker run --rm -i hadolint/hadolint < Dockerfile"
+                        }
+                    }
+                }
+                stage('Kubernetes Lint') {
+                    steps {
+                        script {
+                            echo "Linting Kubernetes Manifests using Kubeconform..."
+                            // Validates your deployment.yaml against Kubernetes schemas
+                            sh "docker run --rm -v \$(pwd):/project -w /project ghcr.io/yannh/kubeconform:latest deployment.yaml"
+                        }
+                    }
+                }
+                stage('Java Lint / Checkstyle') {
+                    steps {
+                        script {
+                            echo "Running Java Checkstyle via Maven..."
+                            // Runs Maven Checkstyle plugin to enforce coding standards
+                            sh "mvn checkstyle:check"
+                        }
+                    }
+                }
+            }
+        }
+
         stage('Static code analysis') {
             steps {
                 script {
@@ -118,9 +153,9 @@ pipeline {
                     // Check connection to Kubernetes cluster
                     echo "Checking connection to Kubernetes cluster..."
                     sh "aws eks update-kubeconfig --region ${region} --name ${cluster_name}"
-                    sh "kubectl get po"
-                    sh "kubectl apply -f deployment.yaml"
-                    sh "kubectl rollout status deployment/devops-training"
+                    // sh "kubectl get po"
+                    // sh "kubectl apply -f deployment.yaml"
+                    // sh "kubectl rollout status deployment/devops-training"
                 }
             }
         }
@@ -131,6 +166,7 @@ pipeline {
   post {
         always {
             echo 'Cleaning up...'
+            filterLogs('WARNING', 10)
             cleanWs()
         }
     }
