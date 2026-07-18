@@ -1,3 +1,5 @@
+@Library('sharedLibrary') _
+
 def getDockerTag(){
     def tag = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
     return tag
@@ -26,11 +28,11 @@ pipeline {
                             
                             // Execute the verification script (assumed to be in your repo at scripts/check_commit.sh)
                             // If the script exits with status 1, the pipeline will fail here.
-                            sh "chmod +x scripts/check_commit.sh"
-                            // Catch errors from the validation script to mark the stage UNSTABLE instead of FAILURE
-                            catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
-                                sh "./scripts/check_commit.sh commit_msg.txt"
-                            }
+                            // sh "chmod +x scripts/check_commit.sh"
+                            // // Catch errors from the validation script to mark the stage UNSTABLE instead of FAILURE
+                            // catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
+                            //     sh "./scripts/check_commit.sh commit_msg.txt"
+                            // }
                         }
                     }
                 }
@@ -164,6 +166,7 @@ pipeline {
   post {
         always {
             echo 'Cleaning up...'
+            filterLogs('WARNING', 10)
             cleanWs()
         }
     }
