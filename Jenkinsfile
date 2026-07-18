@@ -85,8 +85,14 @@ pipeline {
                 script {
                     // Securely inject the credentials you created
                     withSonarQubeEnv(credentialsId: 'sonarqube-token') {
-                        sh "mvn sonar:sonar"
+                        sh "mvn test sonar:sonar"
                     }
+                    
+                    recordCoverage(
+                        tools: [[parser: 'JACOCO', pattern: '**/target/site/jacoco/jacoco.xml']],
+                        sourceCodeRetention: 'EVERY_BUILD'
+                    )
+
                     timeout(time: 1, unit: 'HOURS') {
                         def qg = waitForQualityGate()
                         if (qg.status != 'OK') {
