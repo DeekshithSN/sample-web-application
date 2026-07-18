@@ -167,7 +167,6 @@ pipeline {
   post {
         always {
             echo 'Cleaning up...'
-            filterLogs('WARNING', 10)
             cleanWs()
         }
     }
