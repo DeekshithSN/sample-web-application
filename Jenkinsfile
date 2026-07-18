@@ -85,8 +85,9 @@ pipeline {
                 script {
                     // Securely inject the credentials you created
                     withSonarQubeEnv(credentialsId: 'sonarqube-token') {
-                        sh "mvn sonar:sonar"
+                        sh "mvn test sonar:sonar"
                     }
+
                     timeout(time: 1, unit: 'HOURS') {
                         def qg = waitForQualityGate()
                         if (qg.status != 'OK') {
@@ -166,7 +167,6 @@ pipeline {
   post {
         always {
             echo 'Cleaning up...'
-            filterLogs('WARNING', 10)
             cleanWs()
         }
     }
